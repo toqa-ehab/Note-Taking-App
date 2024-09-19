@@ -1,0 +1,211 @@
+body {
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: rgb(248, 209, 137);
+  color: #333;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+.toggle {
+  --width-of-switch: 3.5em;
+  --height-of-switch: 2em;
+  /* size of sliding icon -- sun and moon */
+  --size-of-icon: 1.4em;
+  /* it is like a inline-padding of switch */
+  --slider-offset: 0.3em;
+  position: relative;
+  width: var(--width-of-switch);
+  height: var(--height-of-switch);
+  bottom: 150px;
+  left: 20px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e4dfbb;
+  transition: 0.4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: var(--size-of-icon, 1.4em);
+  width: var(--size-of-icon, 1.4em);
+  border-radius: 20px;
+  left: var(--slider-offset, 0.3em);
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #303136;
+}
+
+input:checked + .slider:before {
+  left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
+  background: #303136;
+  box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #db7f0e;
+  width: 900px;
+  text-align: center;
+  border-radius: 30px;
+  background: #f1f1f1;
+  background-image: linear-gradient(
+      90deg,
+      transparent 50px,
+      #ffb4b8 50px,
+      #ffb4b8 52px,
+      transparent 52px
+    ),
+    linear-gradient(#858484 0.1em, transparent 0.1em);
+  background-size: 100% 30px;
+}
+
+h1 {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-shadow: 1px 2px grey;
+}
+
+textarea,
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #db7f0e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 30px;
+}
+
+button:hover {
+  background-color: #b2680e;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #d0d1d2;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: left;
+  position: relative;
+}
+
+li span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+button.edit,
+button.delete {
+  background-color: #d23655;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 5px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  border-radius: 30px;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+button.delete {
+  background-color: rgb(237, 25, 25);
+  right: 80px;
+}
+
+.toggle {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.dark-mode {
+  background-color: #33323d;
+  color: #fff;
+}
+
+.dark-mode .container {
+  background-color: #505050;
+  box-shadow: 5px 5px 5px #7a75da;
+}
+
+.dark-mode button {
+  background-color: #7a75da;
+  color: #fff;
+}
+
+.dark-mode button:hover {
+  background-color: #464381;
+}
+
+.dark-mode li {
+  background-color: #868585;
+  border-color: #666;
+}
+
+.dark-mode li span {
+  color: #ccc;
+}
+
+.dark-mode button.edit {
+  background-color: #14122e;
+}
+.dark-mode button.delete {
+  background-color: rgb(93, 10, 10);
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

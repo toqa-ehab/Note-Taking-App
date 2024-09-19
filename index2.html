@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+      <label class="toggle">
+          <input type="checkbox"  id="darkModeToggle" />
+          <span class="slider"></span>
+      </label>
+    <div class="container">
+      <h1>Your notes</h1>
+      
+      <textarea id="noteInput" placeholder="Type your note here..."></textarea>
+      <input type="text" id="noteCategory" placeholder="Category" />
+      <input type="text" id="noteTags" placeholder="Tags (comma-separated)" />
+      <button id="addNoteButton">Add Note</button>
+
+      <ul id="noteList"></ul>
+    </div>
+
+    <script src="javascript.js"></script>
+  </body>
+</html>
