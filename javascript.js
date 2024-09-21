@@ -15,12 +15,12 @@ document.getElementById("addNoteButton").addEventListener("click", () => {
   if (!noteText) return;
 
   const noteData = {
+    id: Date.now(),
     text: noteText,
     category: noteCategory.value.trim(),
     tags: noteTags.value.trim(),
   };
 
-  // Add the note to the UI and Local Storage
   addNoteToUI(noteData);
   saveNoteToLocalStorage(noteData);
 
@@ -34,6 +34,7 @@ darkModeToggle.addEventListener("change", () => {
 
 function addNoteToUI(noteData) {
   const li = document.createElement("li");
+  li.setAttribute("data-id", noteData.id);
   li.innerHTML = `
     ${noteData.text} 
     <span>Category: ${noteData.category}</span>
@@ -47,13 +48,13 @@ function addNoteToUI(noteData) {
     if (newText !== null) {
       noteData.text = newText;
       li.firstChild.textContent = newText;
-      updateNotesInLocalStorage();
+      updateNoteInLocalStorage(noteData); // Update the edited note in Local Storage
     }
   });
 
   li.querySelector(".delete").addEventListener("click", () => {
     li.remove();
-    removeNoteFromLocalStorage(noteData);
+    removeNoteFromLocalStorage(noteData.id);
   });
 
   noteList.appendChild(li);
@@ -71,23 +72,16 @@ function loadNotesFromLocalStorage() {
   notes.forEach((note) => addNoteToUI(note));
 }
 
-function updateNotesInLocalStorage() {
-  const notes = [];
-  document.querySelectorAll("#noteList li").forEach((li) => {
-    const text = li.firstChild.textContent.trim();
-    const category = li
-      .querySelector("span:nth-child(2)")
-      .textContent.replace("Category: ", "");
-    const tags = li
-      .querySelector("span:nth-child(3)")
-      .textContent.replace("Tags: ", "");
-    notes.push({ text, category, tags });
-  });
+function updateNoteInLocalStorage(updatedNote) {
+  let notes = JSON.parse(localStorage.getItem("notes")) || [];
+  notes = notes.map((note) =>
+    note.id === updatedNote.id ? updatedNote : note
+  );
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
-function removeNoteFromLocalStorage(noteToRemove) {
+function removeNoteFromLocalStorage(noteId) {
   let notes = JSON.parse(localStorage.getItem("notes")) || [];
-  notes = notes.filter((note) => note.text !== noteToRemove.text);
+  notes = notes.filter((note) => note.id !== noteId);
   localStorage.setItem("notes", JSON.stringify(notes));
 }
